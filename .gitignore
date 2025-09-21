@@ -1,0 +1,17 @@
+# Ignorar node_modules en todo el proyecto
+**/node_modules/
+**/.pnp
+.pnp.js
+
+# Testing y logs
+**/coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Builds y entornos
+**/build/
+.DS_Store
+.env*
+!.env.example  # Excepción: Si tienes un .env de ejemplo
