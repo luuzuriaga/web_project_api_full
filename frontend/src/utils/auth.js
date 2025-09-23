@@ -1,4 +1,3 @@
-// utils/auth.js
 class Auth {
   constructor(baseUrl) {
     this._baseUrl = baseUrl;
@@ -65,10 +64,10 @@ class Auth {
       const data = await res.json();
       console.log('✅ Respuesta exitosa:', data); // Debug
       
-      // La API de TripleTen devuelve los datos en formato diferente
-      // Para registro: { data: { email, _id } }
-      // Para login: { token }
-      // Para checkToken: { data: { email, _id } }
+      // Tu backend local devuelve los datos en formato:
+      // Para registro: { data: { email, _id, name, about, avatar } }
+      // Para login: { token, message }
+      // Para checkToken: { data: { email, _id, name, about, avatar } }
       return data;
     }
     
@@ -88,7 +87,7 @@ class Auth {
   }
 }
 
-// Configuración de auth para TripleTen
-const auth = new Auth('https://se-register-api.en.tripleten-services.com/v1');
+// Configuración para tu backend local
+const auth = new Auth('http://localhost:3001');
 
 export default auth;

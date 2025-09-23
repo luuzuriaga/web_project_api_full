@@ -1,4 +1,3 @@
-// utils/Api.js
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -34,20 +33,10 @@ class Api {
       }
       return res.json();
     })
-    .then((data) => {
-      console.log('Datos usuario recibidos:', data); // Debug
-      // La API de TripleTen devuelve { data: { email, _id } }
-      // pero necesitamos mantener compatibilidad con el frontend
-      if (data.data) {
-        return {
-          email: data.data.email,
-          _id: data.data._id,
-          name: data.data.name || 'Usuario', // valor por defecto
-          about: data.data.about || 'Explorador', // valor por defecto
-          avatar: data.data.avatar || 'https://via.placeholder.com/120'
-        };
-      }
-      return data;
+    .then((response) => {
+      console.log('Datos usuario recibidos:', response); // Debug
+      // El backend devuelve { data: { email, _id, name, about, avatar } }
+      return response.data || response;
     });
   }
 
@@ -73,11 +62,18 @@ class Api {
       if (Array.isArray(data)) {
         return data.map(card => ({
           ...card,
-          isLiked: card.likes && card.likes.length > 0 // Ajustar según la estructura de la API
+          isLiked: card.likes && card.likes.some(like => 
+            typeof like === 'string' ? like === this._currentUserId : like._id === this._currentUserId
+          )
         }));
       }
       return data;
     });
+  }
+
+  // Método para establecer el ID del usuario actual (para verificar likes)
+  setCurrentUserId(userId) {
+    this._currentUserId = userId;
   }
 
   // Actualizar perfil de usuario
@@ -93,9 +89,9 @@ class Api {
       }
       return res.json();
     })
-    .then((data) => {
-      // Procesar respuesta si viene envuelta en data
-      return data.data || data;
+    .then((response) => {
+      // El backend devuelve { data: userData }
+      return response.data || response;
     });
   }
 
@@ -112,20 +108,21 @@ class Api {
       }
       return res.json();
     })
-    .then((data) => {
-      // Añadir isLiked a la nueva tarjeta
-      const card = data.data || data;
+    .then((response) => {
+      // El backend devuelve { data: cardData }
+      const card = response.data || response;
       return {
         ...card,
-        isLiked: false
+        isLiked: false // Nueva tarjeta nunca tiene like del usuario actual
       };
     });
   }
 
   // Like/Dislike de tarjeta
   like(id, like) {
+    const method = like ? "PUT" : "DELETE";
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: like ? "PUT" : "DELETE",
+      method,
       headers: this._headers,
     })
     .then((res) => {
@@ -134,8 +131,8 @@ class Api {
       }
       return res.json();
     })
-    .then((data) => {
-      const card = data.data || data;
+    .then((response) => {
+      const card = response.data || response;
       return {
         ...card,
         isLiked: like
@@ -170,19 +167,18 @@ class Api {
       }
       return res.json();
     })
-    .then((data) => {
-      // Procesar respuesta si viene envuelta en data
-      return data.data || data;
+    .then((response) => {
+      // El backend devuelve { data: userData }
+      return response.data || response;
     });
   }
 }
 
-
+// Configuración para desarrollo local
 const api = new Api({
-  baseUrl: "https://around-api.es.tripleten-services.com/v1",
+  baseUrl: "http://localhost:3001", // Cambiar a tu servidor backend
   headers: {
     "Content-Type": "application/json",
-    
   },
 });
 
