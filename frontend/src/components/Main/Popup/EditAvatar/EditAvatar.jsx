@@ -1,3 +1,4 @@
+//EditAvatar.jsx
 import React, { useRef, useContext } from "react";
 import { useCurrentUserContext } from "../../../../contexts/CurrentUserContext.jsx";
 

@@ -1,3 +1,4 @@
+//InfoTooltip.jsx
 import React from 'react';
 import successIcon from '../../../images/check.png';
 import failIcon from '../../../images/error.png';

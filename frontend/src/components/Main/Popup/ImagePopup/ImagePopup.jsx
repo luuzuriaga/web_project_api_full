@@ -1,3 +1,4 @@
+//ImagePopup.jsx
 import React from "react";
 
 export default function ImagePopup({ card, onClose, isOpen = true }) {

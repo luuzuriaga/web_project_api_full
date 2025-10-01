@@ -1,3 +1,4 @@
+//Main.jsx
 import pincelButton from "../../../images/Lapiz Editar.png";
 import { useEffect } from "react";
 import NewCard from "./Popup/NewCard/NewCard.jsx";
