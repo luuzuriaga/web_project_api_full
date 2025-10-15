@@ -1,10 +1,9 @@
+// backend/controllers/users.js
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
-
-// En desarrollo usar una clave por defecto, en producción usar variable de entorno
 const jwtSecret = NODE_ENV === 'production' ? JWT_SECRET : 'desarrollo-secreto-super-seguro';
 
 // Crear usuario (registro)
@@ -12,14 +11,22 @@ const createUser = async (req, res, next) => {
   try {
     const { name, about, avatar, email, password } = req.body;
 
-    // Hash de la contraseña
+    // Verificar si el email ya existe
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      const error = new Error('El email ya está registrado');
+      error.statusCode = 409;
+      return next(error);
+    }
+
+    // Hash de la contraseña (saltos = 12)
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Crear usuario
+    // Crear usuario con valores por defecto si no se proporcionan
     const user = await User.create({
-      name,
-      about,
-      avatar,
+      name: name || 'Jacques Cousteau',
+      about: about || 'Explorador',
+      avatar: avatar || 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
       email,
       password: hashedPassword
     });
@@ -44,13 +51,13 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    // Buscar usuario por email incluyendo contraseña
-    const user = await User.findUserByCredentials(email, password);
+    // Buscar usuario por email e incluir contraseña
+    const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
       const error = new Error('Email o contraseña incorrectos');
       error.statusCode = 401;
-      throw error;
+      return next(error);
     }
 
     // Verificar contraseña
@@ -59,7 +66,7 @@ const login = async (req, res, next) => {
     if (!isValidPassword) {
       const error = new Error('Email o contraseña incorrectos');
       error.statusCode = 401;
-      throw error;
+      return next(error);
     }
 
     // Crear JWT token que expira en una semana
@@ -69,10 +76,7 @@ const login = async (req, res, next) => {
       { expiresIn: '7d' }
     );
 
-    res.json({ 
-      token,
-      message: 'Login exitoso' 
-    });
+    res.json({ token });
   } catch (error) {
     next(error);
   }
@@ -86,7 +90,7 @@ const getCurrentUser = async (req, res, next) => {
     if (!user) {
       const error = new Error('Usuario no encontrado');
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.json({ data: user });
@@ -112,7 +116,7 @@ const updateUser = async (req, res, next) => {
     if (!user) {
       const error = new Error('Usuario no encontrado');
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.json({ data: user });
@@ -138,7 +142,7 @@ const updateAvatar = async (req, res, next) => {
     if (!user) {
       const error = new Error('Usuario no encontrado');
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     res.json({ data: user });

@@ -1,9 +1,11 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 const { errors } = require('celebrate');
+require('dotenv').config(); // ← AÑADIDO
 
 // Importar middlewares
 const auth = require('./middlewares/auth');
@@ -22,20 +24,23 @@ const {
 } = require('./middlewares/validation');
 
 const app = express();
-const { PORT = 3001, NODE_ENV, MONGODB_URI } = process.env;
+const { PORT = 3001, NODE_ENV } = process.env;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/aroundb';
 
 // Configurar conexión a MongoDB
-mongoose.connect(NODE_ENV === 'production' && MONGODB_URI 
-  ? MONGODB_URI 
-  : 'mongodb://localhost:27017/aroundb', {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+}).then(() => {
+  console.log('✅ Conectado a MongoDB');
+}).catch((err) => {
+  console.error('❌ Error conectando a MongoDB:', err);
 });
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100, // límite de 100 requests por ventana por IP
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: 'Demasiadas solicitudes desde esta IP, intenta de nuevo más tarde.'
 });
 
@@ -43,13 +48,13 @@ const limiter = rateLimit({
 app.use(helmet());
 app.use(limiter);
 app.use(cors());
-app.options('*', cors()); // habilitar solicitudes OPTIONS para todas las rutas
+app.options('*', cors());
 app.use(express.json({ limit: '10mb' }));
 
 // Logger de requests
 app.use(requestLogger);
 
-// Crash test route (solo para desarrollo/testing)
+// ⚠️ CRASH TEST (eliminar después de testing)
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('El servidor va a caer');
@@ -67,18 +72,18 @@ app.use(auth);
 app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
-// Ruta 404 para endpoints no encontrados
+// Ruta 404
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Ruta no encontrada' });
 });
 
-// Manejo centralizado de errores de celebrate
+// Manejo de errores de celebrate
 app.use(errors());
 
-// Middleware de manejo centralizado de errores
+// Middleware de manejo centralizado de errores (¡DEBE IR AL FINAL!)
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en puerto ${PORT}`);
-  console.log(`Modo: ${NODE_ENV || 'desarrollo'}`);
+  console.log(`🚀 Servidor ejecutándose en puerto ${PORT}`);
+  console.log(`📝 Modo: ${NODE_ENV || 'desarrollo'}`);
 });

@@ -1,3 +1,4 @@
+// backend/controllers/cards.js
 const Card = require('../models/Card');
 
 // Obtener todas las tarjetas

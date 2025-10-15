@@ -1,3 +1,5 @@
+
+// backend/middlewares/errorHandler.js
 const winston = require('winston');
 
 // Logger para errores

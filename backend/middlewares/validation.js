@@ -1,7 +1,9 @@
+
+// backend/middlewares/validation.js
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 
-// Función para validar URLs usando validator
+// Función para validar URLs
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
     return value;
@@ -9,7 +11,7 @@ const validateURL = (value, helpers) => {
   return helpers.error('string.uri');
 };
 
-// Validación para ObjectId de MongoDB
+// Función para validar ObjectId de MongoDB
 const validateObjectId = (value, helpers) => {
   if (!validator.isMongoId(value)) {
     return helpers.error('string.objectId');
@@ -32,7 +34,7 @@ const validateUserRegistration = celebrate({
 const validateUserLogin = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required()
+    password: Joi.string().required().min(8)
   })
 });
 
