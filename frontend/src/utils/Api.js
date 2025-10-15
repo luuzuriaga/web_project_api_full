@@ -179,7 +179,7 @@ class Api {
 
 
 const api = new Api({
-  baseUrl: process.env.REACT_APP_API_URL || "https://luceroapi.baselinux.net",
+  baseUrl: import.meta.env.VITE_API_URL || "https://luceroapi.baselinux.net",
   headers: {
     "Content-Type": "application/json",
     
