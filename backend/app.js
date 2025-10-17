@@ -42,13 +42,11 @@ mongoose.connect(MONGODB_URI || 'mongodb://localhost:27017/aroundb', {
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
+      'https://lucerofront.baselinux.net',
+      'https://www.lucerofront.baselinux.net',
       'http://localhost:5173',
       'http://localhost:3000',
-      'http://127.0.0.1:5173',
-      'https://lucero.baselinux.net',
-      'http://www.lucero.baselinux.net',
-      'http://lucero.baselinux.net:3000',
-      'http://www.lucero.baselinux.net:3000'
+      'http://127.0.0.1:5173'
     ];
     
     // Permitir requests sin origin (como Postman) en desarrollo

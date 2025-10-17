@@ -36,24 +36,49 @@
 .popup__close {
   position: absolute;
   top: -40px;
-  right: -40px;
+  right: -20px;
   border: none;
   background-color: transparent;
+
+  background-size: 20px 20px; 
+  background-repeat: no-repeat;
+  background-position: center;
   z-index: 2;
   color: white;
   font-size: 40px;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
+  padding: 40px 0;
 }
 
-.popup__close::before {
-  content: "×";
+.popup__close-auth{
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  border: none;
+  background-color: transparent;
+  background-image: url('/images/CloseIcon.png');
+  background-size: 20px 20px; 
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+  color: white;
+  font-size: 40px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  padding: 40px 0;
 }
+
 
 .popup__close:hover {
   opacity: 0.6;
@@ -78,6 +103,119 @@
   color: #000000;
   max-width: 358px;
   margin: 0 auto;
+}
+
+.popup__title {
+  margin: 0 0 48px;
+  font-family: 'Inter', Arial, sans-serif; /* Tipografía más moderna */
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  text-align: left; /* Alineación a la izquierda */
+}
+
+/* Inputs con mejor tipografía */
+.popup__input {
+  width: 100%;
+  padding: 0 0 13px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: 'Inter', Arial, sans-serif; /* Tipografía más moderna */
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  box-sizing: border-box;
+  padding: 12px 0; /* Más padding vertical en el input */
+}
+
+.popup__input::placeholder {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: #C4C4C4;
+}
+
+
+
+.popup__close-button {
+  position: absolute;
+  top: 140px;
+  left: 440px;
+  border: none;
+  background-color: transparent;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  transition: opacity 0.3s ease;
+  padding: 40px 0;
+}
+
+/* 3.5. ESPACIO ENTRE INPUTS */
+.popup__field {
+  margin-bottom: 48px; /* Mayor espacio entre inputs */
+  text-align: left;
+}
+
+.popup__submit-button {
+  width: 100%; 
+  margin-top: 48px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px; /* Esquinas redondeadas */
+  background-color: #000000;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.popup__submit-button:hover {
+  opacity: 0.85;
+  transform: translateY(-1px); /* Efecto sutil de elevación */
+}
+
+.popup__submit-button:active {
+  transform: translateY(0); /* Vuelve a la posición al hacer click */
+}
+
+.popup__button-confirm {
+  width: 100%; 
+  padding: 14px 36px;
+  border: none;
+  border-radius: 8px; /* Esquinas redondeadas */
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.popup__button-confirm:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.popup__button-confirm:active {
+  transform: translateY(0);
+}
+
+
+.popup__modal-content{
+  width: 60%; 
+
 }
 
 /* Responsive */

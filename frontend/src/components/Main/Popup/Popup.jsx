@@ -20,7 +20,7 @@ export default function Popup(props) {
           <img
             src={closeButton}
             alt="Botón Cerrar"
-            className="popup__close-button"
+            className="popup__close"
           />
         </button>
         {title && <h3 className="popup__title">{title}</h3>}
