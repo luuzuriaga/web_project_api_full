@@ -218,6 +218,14 @@
 
 }
 
+.popup__modal-description{
+
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+
+}
+
 /* Responsive */
 @media screen and (max-width: 480px) {
   .popup__container {

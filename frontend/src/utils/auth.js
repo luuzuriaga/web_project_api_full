@@ -5,7 +5,7 @@ class Auth {
   }
 
   // Registrar usuario
-  register(password, email) {
+  register(email, password) {
     console.log('🔄 Auth.register llamado con:', { email, passwordLength: password?.length });
     console.log('🌐 URL de registro:', `${this._baseUrl}/signup`);
     
@@ -14,7 +14,7 @@ class Auth {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ password, email })
+      body: JSON.stringify({ email, password })
     })
     .then((res) => {
       console.log('📡 Response status register:', res.status);
@@ -27,7 +27,7 @@ class Auth {
   }
 
   // Iniciar sesión
-  login(password, email) {
+  login(email, password) {
     console.log('🔄 Auth.login llamado con:', { email, passwordLength: password?.length });
     console.log('🌐 URL de login:', `${this._baseUrl}/signin`);
     
@@ -36,7 +36,7 @@ class Auth {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ password, email })
+      body: JSON.stringify({ email, password })
     })
     .then((res) => {
       console.log('📡 Login response status:', res.status);
@@ -54,7 +54,7 @@ class Auth {
 
   // Verificar token
   checkToken(token) {
-    console.log('🔄 Verificando token...'); // Debug
+    console.log('🔄 Verificando token...');
     console.log('🌐 URL de verificación:', `${this._baseUrl}/users/me`);
     
     return fetch(`${this._baseUrl}/users/me`, {
@@ -65,7 +65,7 @@ class Auth {
       }
     })
     .then((res) => {
-      console.log('📡 CheckToken response status:', res.status); // Debug
+      console.log('📡 CheckToken response status:', res.status);
       return this._checkResponse(res);
     });
   }
@@ -73,7 +73,7 @@ class Auth {
   async _checkResponse(res) {
     if (res.ok) {
       const data = await res.json();
-      console.log('✅ Respuesta exitosa:', data); // Debug
+      console.log('✅ Respuesta exitosa:', data);
       return data;
     }
     
@@ -82,10 +82,9 @@ class Auth {
     try {
       const errorData = await res.json();
       errorMessage = errorData.message || errorData.error || errorMessage;
-      console.log('📄 Detalles del error:', errorData); // Debug
+      console.log('📄 Detalles del error:', errorData);
     } catch (e) {
-      // Si no se puede parsear el JSON del error, usar el mensaje por defecto
-      console.log('⚠️ No se pudo parsear el error JSON'); // Debug
+      console.log('⚠️ No se pudo parsear el error JSON');
     }
     
     console.error('❌ Error response:', errorMessage);
@@ -93,7 +92,6 @@ class Auth {
   }
 }
 
-// IMPORTANTE: Cambiar a TU backend local
 const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 console.log('🔧 Auth configurado con URL:', baseUrl);
 

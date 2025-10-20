@@ -50,33 +50,33 @@ function App() {
   }, []);
 
   // Cargar datos iniciales (usuario y tarjetas)
-const loadInitialData = async () => {
-  try {
-    console.log('Cargando datos iniciales...'); // Debug
-    const [userData, cardsData] = await Promise.all([
-      api.getUserInformation(),
-      api.getInitialCards()
-    ]);
-    
-    console.log('Datos de usuario:', userData); // Debug
-    console.log('Datos de tarjetas:', cardsData); // Debug
-    console.log('Número de tarjetas:', cardsData?.length); // Debug
-    
-    setCurrentUser(userData);
-    setCards(cardsData);
-  } catch (error) {
-    console.error('Error cargando datos iniciales:', error);
-  } finally {
-    setIsLoading(false);
-  }
-};
+  const loadInitialData = async () => {
+    try {
+      console.log('Cargando datos iniciales...');
+      const [userData, cardsData] = await Promise.all([
+        api.getUserInformation(),
+        api.getInitialCards()
+      ]);
+      
+      console.log('Datos de usuario:', userData);
+      console.log('Datos de tarjetas:', cardsData);
+      console.log('Número de tarjetas:', cardsData?.length);
+      
+      setCurrentUser(userData);
+      setCards(cardsData);
+    } catch (error) {
+      console.error('Error cargando datos iniciales:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Manejar registro
   const handleRegister = async ({ email, password }) => {
     try {
-      console.log('Intentando registrar:', { email }); // Debug
-      const result = await auth.register(password, email);
-      console.log('Registro exitoso:', result); // Debug
+      console.log('Intentando registrar:', { email });
+      const result = await auth.register(email, password);
+      console.log('Registro exitoso:', result);
       
       // La API devuelve { data: { email, _id } } en caso de éxito
       if (result.data || result.email) {
@@ -97,15 +97,14 @@ const loadInitialData = async () => {
   // Manejar login
   const handleLogin = async ({ email, password }) => {
     try {
-      console.log('Intentando login:', { email }); // Debug
-      const data = await auth.login(password, email);
-      console.log('Login response:', data); // Debug
+      console.log('Intentando login:', { email });
+      const data = await auth.login(email, password);
+      console.log('Login response:', data);
       
       if (data.token) {
-        console.log('TOKEN RECIBIDO:', data.token); // IMPORTANTE: ver el token completo
-        console.log('LONGITUD DEL TOKEN:', data.token.length); // Ver si es un JWT válido
-      
-
+        console.log('TOKEN RECIBIDO:', data.token);
+        console.log('LONGITUD DEL TOKEN:', data.token.length);
+        
         localStorage.setItem('token', data.token);
         api.setToken(data.token);
         setLoggedIn(true);
