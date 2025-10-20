@@ -24,7 +24,7 @@ const {
 } = require('./middlewares/validation');
 
 const app = express();
-const { PORT = 3001, NODE_ENV, MONGODB_URI } = process.env;
+const { PORT = 3000, NODE_ENV, MONGODB_URI } = process.env;
 
 // Configurar conexión a MongoDB
 mongoose.connect(MONGODB_URI || 'mongodb://localhost:27017/aroundb', {
