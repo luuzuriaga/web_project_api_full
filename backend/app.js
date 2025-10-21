@@ -45,8 +45,9 @@ const corsOptions = {
       'https://lucerofront.baselinux.net',
       'https://www.lucerofront.baselinux.net',
       'http://localhost:5173',
-      'http://localhost:3000',
+      'http://localhost:3001',
       'http://127.0.0.1:5173'
+
     ];
     
     // Permitir requests sin origin (como Postman) en desarrollo
