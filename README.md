@@ -417,7 +417,7 @@ La aplicación es completamente responsiva con breakpoints:
 ## 👨‍💻 Autor
 
 **Lucero Uzuriaga**
-- GitHub: [luuzuriaga](hhttps://github.com/luuzuriaga/web_project_api_full)
+- GitHub: [luuzuriaga](https://github.com/luuzuriaga/web_project_api_full)
 
 ---
 
