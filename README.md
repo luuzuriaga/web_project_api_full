@@ -13,7 +13,7 @@ Este proyecto representa la culminación del bootcamp de Desarrollo Web, integra
 ---
 
 ![Login](./frontend/images/singin.png)
-![Signin](./frontend/images/home.png))
+![Signin](./frontend/images/home.png)
 
 ## 🌐 Enlaces del Proyecto
 
