@@ -43,6 +43,12 @@ Este proyecto representa la culminación del bootcamp de Desarrollo Web, integra
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![React Router](https://img.shields.io/badge/React_Router_DOM-CA4245?style=flat&logo=reactrouter&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=FFD62E)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)
+
 - **React** 18.x - Biblioteca de JavaScript para interfaces de usuario
 - **React Router DOM** - Enrutamiento para Single Page Application
 - **Vite** - Build tool y dev server de última generación
@@ -50,6 +56,20 @@ Este proyecto representa la culminación del bootcamp de Desarrollo Web, integra
 - **JavaScript ES6+** - Características modernas de JavaScript
 
 ### Backend
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat&logo=mongoose&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white)
+![bcryptjs](https://img.shields.io/badge/bcryptjs-003366?style=flat&logo=lock&logoColor=white)
+![validator](https://img.shields.io/badge/validator-2C3E50?style=flat&logo=data&logoColor=white)
+![Celebrate/Joi](https://img.shields.io/badge/Celebrate%2FJoi-6E40C9?style=flat&logo=joi&logoColor=white)
+![Winston](https://img.shields.io/badge/Winston-4A4A4A?style=flat&logo=winston&logoColor=white)
+![express-winston](https://img.shields.io/badge/express--winston-4A4A4A?style=flat&logo=express&logoColor=white)
+![helmet](https://img.shields.io/badge/helmet-00897B?style=flat&logo=helmet&logoColor=white)
+![CORS](https://img.shields.io/badge/CORS-FF6F00?style=flat&logo=internetexplorer&logoColor=white)
+![dotenv](https://img.shields.io/badge/dotenv-ECD53F?style=flat&logo=.env&logoColor=black)
+
 - **Node.js** - Entorno de ejecución de JavaScript
 - **Express.js** - Framework web minimalista y flexible
 - **MongoDB** - Base de datos NoSQL
@@ -65,6 +85,11 @@ Este proyecto representa la culminación del bootcamp de Desarrollo Web, integra
 - **dotenv** - Gestión de variables de entorno
 
 ### Infraestructura y DevOps
+![Google Cloud](https://img.shields.io/badge/Google_Cloud_Platform-4285F4?style=flat&logo=googlecloud&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)
+![PM2](https://img.shields.io/badge/PM2-2B037A?style=flat&logo=pm2&logoColor=white)
+![Let's Encrypt](https://img.shields.io/badge/Let's_Encrypt-003A70?style=flat&logo=letsencrypt&logoColor=white)
+![FreeDNS](https://img.shields.io/badge/FreeDNS-0052CC?style=flat&logo=dns&logoColor=white)
 - **Google Cloud Platform** - Hosting del servidor
 - **Nginx** - Servidor web y proxy inverso
 - **PM2** - Process manager para Node.js
